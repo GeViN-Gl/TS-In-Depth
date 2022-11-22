@@ -15,13 +15,22 @@ enum Category {
     Angular,
 }
 
-type Book = {
+// type Book = {
+//     id: number;
+//     title: string;
+//     author: string;
+//     available: boolean;
+//     category: Category;
+// };
+
+interface Book {
     id: number;
     title: string;
     author: string;
     available: boolean;
     category: Category;
-};
+    pages?: number;
+}
 
 function getAllBooks(): readonly Book[] {
     const books = <const>[
@@ -99,7 +108,7 @@ function createCustomer(name: string, age?: number, city?: string): void {
     }
 }
 
-function getBookByID(id: number): Book {
+function getBookByID(id: Book['id']): Book | undefined {
     const books = getAllBooks();
     return books.find(book => book.id === id);
 }
@@ -147,6 +156,10 @@ function bookTitleTransform(title: any): string {
     return [...title].reverse().join('');
 }
 
+function printBook(book: Book): void {
+    console.log(` ${book.title} by ${book.author}`);
+}
+
 /*
 // calcTotalPages();
 // Task 02.01
@@ -191,3 +204,17 @@ function bookTitleTransform(title: any): string {
 
 // console.log(bookTitleTransform('Learn TypeScript'));
 // console.log(bookTitleTransform(123));
+
+// Task 04.01
+const mybook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // year: 2015,
+    // copies: 3,
+    pages: 200,
+};
+
+printBook(mybook);
