@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
@@ -50,13 +51,13 @@ function getAllBooks(): readonly Book[] {
     return books;
 }
 
-function logFirstAvaible(books: readonly Book[]): void {
+function logFirstAvaible(books: readonly Book[] = getAllBooks()): void {
     console.log(`Number of books: ${books.length}`);
     const title = books.find(book => book?.available)?.title;
     console.log(title);
 }
 
-function getBookTitlesByCategory(inputCategory: Category): string[] {
+function getBookTitlesByCategory(inputCategory: Category = Category.JavaScript): string[] {
     return getAllBooks()
         .filter(({ category }) => category === inputCategory)
         .map(({ title }) => title);
@@ -84,10 +85,109 @@ function calcTotalPages(): void {
     console.log(totalPages);
 }
 
-// -------------
+function createCustomerID(name: string, id: number): string {
+    return `${id}/${name}`;
+}
+
+function createCustomer(name: string, age?: number, city?: string): void {
+    console.log(`Customer name:${name}`);
+    if (age) {
+        console.log(`Customer age: ${age}`);
+    }
+    if (city) {
+        console.log(`Customer city: ${city}`);
+    }
+}
+
+function getBookByID(id: number): Book {
+    const books = getAllBooks();
+    return books.find(book => book.id === id);
+}
+
+function checkoutBooks(customer: string, ...bookIDs: number[]): string[] {
+    console.log(`Customer name: ${customer}`);
+    return bookIDs
+        .map(id => getBookByID(id))
+        .filter(book => book.available)
+        .map(book => book.title);
+}
+
+function getTitles(author: string): string[];
+function getTitles(available: boolean): string[];
+function getTitles(id: number, available: boolean): string[];
+function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
+    const books = getAllBooks();
+
+    if (args.length === 1) {
+        const [arg] = args;
+        if (typeof arg === 'string') {
+            return books.filter(book => book.author === arg).map(book => book.title);
+        } else if (typeof arg === 'boolean') {
+            return books.filter(book => book.available === arg).map(book => book.title);
+        }
+    } else if (args.length === 2) {
+        const [id, available] = args;
+        if (typeof id === 'number' && typeof available === 'boolean') {
+            return books.filter(book => book.id === id && book.available === available).map(book => book.title);
+        }
+    }
+
+    return [];
+}
+
+function assertStringValue(data: any): asserts data is string {
+    if (typeof data !== 'string') {
+        throw new Error('value should have been a string');
+    }
+}
+
+function bookTitleTransform(title: any): string {
+    assertStringValue(title);
+
+    return [...title].reverse().join('');
+}
+
+/*
 // calcTotalPages();
+// Task 02.01
 // console.log(getAllBooks());
-logFirstAvaible(getAllBooks());
+// logFirstAvaible(getAllBooks());
 // console.log(getBookTitlesByCategory(Category.CSS));
 // logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 // console.log(getBookAuthorByIndex(0));
+
+// Task 03.01
+// const myId: string = createCustomerID('Ann', 10);
+// console.log(myId);
+
+// let idGenerator: (name: string, id: number) => string;
+// let idGenerator: typeof createCustomerID;
+// idGenerator = (name: string, id: number) => `${id}/${name}`;
+// idGenerator = createCustomerID;
+// console.log(idGenerator('boris',20));
+*/
+
+/*
+// Task 03.02
+// createCustomer('Anna');
+// createCustomer('Anna', 10);
+// createCustomer('Anna', 12, 'Kyiv');
+
+// console.log(getBookTitlesByCategory());
+// console.log(getBookTitlesByCategory(Category.CSS));
+// logFirstAvaible();
+
+// console.log(getBookByID(1));
+// checkoutBooks('Ann', 1, 2, 4);
+// checkoutBooks('Ann');
+*/
+// Task 03.03
+// getTitles(1, true);
+
+// console.log(getTitles(1, true));
+// console.log(getTitles(true));
+// console.log(getTitles(false));
+// console.log(getTitles('Lea Verou'));
+
+// console.log(bookTitleTransform('Learn TypeScript'));
+// console.log(bookTitleTransform(123));
