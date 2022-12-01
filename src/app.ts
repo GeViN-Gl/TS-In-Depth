@@ -14,7 +14,7 @@ enum Category {
     TypeScript,
     Angular,
 }
-
+/*
 // type Book = {
 //     id: number;
 //     title: string;
@@ -22,7 +22,7 @@ enum Category {
 //     available: boolean;
 //     category: Category;
 // };
-
+*/
 interface Book {
     id: number;
     title: string;
@@ -30,6 +30,13 @@ interface Book {
     available: boolean;
     category: Category;
     pages?: number;
+    // markDamaged?: (reason: string) => void;
+    // markDamaged?(reason: string): void;
+    markDamaged?: DamageLogger;
+}
+
+interface DamageLogger {
+    (reason: string): void;
 }
 
 function getAllBooks(): readonly Book[] {
@@ -194,6 +201,8 @@ function printBook(book: Book): void {
 // checkoutBooks('Ann', 1, 2, 4);
 // checkoutBooks('Ann');
 */
+
+/*
 // Task 03.03
 // getTitles(1, true);
 
@@ -204,17 +213,29 @@ function printBook(book: Book): void {
 
 // console.log(bookTitleTransform('Learn TypeScript'));
 // console.log(bookTitleTransform(123));
+*/
 
+/*
 // Task 04.01
-const mybook: Book = {
-    id: 5,
-    title: 'Colors, Backgrounds, and Gradients',
-    author: 'Eric A. Meyer',
-    available: true,
-    category: Category.CSS,
-    // year: 2015,
-    // copies: 3,
-    pages: 200,
-};
+// const mybook: Book = {
+//     id: 5,
+//     title: 'Colors, Backgrounds, and Gradients',
+//     author: 'Eric A. Meyer',
+//     available: true,
+//     category: Category.CSS,
+//     // year: 2015,
+//     // copies: 3,
+//     pages: 200,
+//     // // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
+//     markDamaged(reason: string) {
+//         console.log(`Damaged: ${reason}`);
+//     },
+// };
 
-printBook(mybook);
+// printBook(mybook);
+// mybook.markDamaged('missing back cover');
+*/
+
+// Task 04.02
+const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+logDamage('missing back cover');
