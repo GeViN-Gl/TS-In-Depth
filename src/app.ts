@@ -23,6 +23,9 @@ enum Category {
 //     category: Category;
 // };
 */
+
+type BookProperties = keyof Book; // | 'isbn';
+
 interface Book {
     id: number;
     title: string;
@@ -33,6 +36,20 @@ interface Book {
     // markDamaged?: (reason: string) => void;
     // markDamaged?(reason: string): void;
     markDamaged?: DamageLogger;
+}
+
+interface Person {
+    name: string;
+    email: string;
+}
+
+interface Author extends Person {
+    numBooksPublished: number;
+}
+
+interface Librarian extends Person {
+    department: string;
+    assistCustomer: (custName: string, bookTitle: string) => void;
 }
 
 interface DamageLogger {
@@ -167,6 +184,12 @@ function printBook(book: Book): void {
     console.log(` ${book.title} by ${book.author}`);
 }
 
+function getProperty(book: Book, prop: BookProperties): any {
+    const value = book[prop];
+
+    return typeof value === 'function' ? value.name : value;
+}
+
 /*
 // calcTotalPages();
 // Task 02.01
@@ -215,27 +238,63 @@ function printBook(book: Book): void {
 // console.log(bookTitleTransform(123));
 */
 
-/*
 // Task 04.01
-// const mybook: Book = {
-//     id: 5,
-//     title: 'Colors, Backgrounds, and Gradients',
-//     author: 'Eric A. Meyer',
-//     available: true,
-//     category: Category.CSS,
-//     // year: 2015,
-//     // copies: 3,
-//     pages: 200,
-//     // // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
-//     markDamaged(reason: string) {
-//         console.log(`Damaged: ${reason}`);
-//     },
-// };
+const mybook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // year: 2015,
+    // copies: 3,
+    pages: 200,
+    // // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
+    markDamaged(reason: string) {
+        console.log(`Damaged: ${reason}`);
+    },
+};
 
 // printBook(mybook);
 // mybook.markDamaged('missing back cover');
-*/
+
+/*
 
 // Task 04.02
-const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
-logDamage('missing back cover');
+// const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+// logDamage('missing back cover');
+
+// // Task 04.03
+// const favorieAuthor: Author = {
+//     name: 'Anna',
+//     email: 'anna@gmail.com',
+//     numBooksPublished: 2,
+// };
+
+// const favorieLibrarian: Librarian = {
+//     name: 'Boris',
+//     email: 'boris@gmail.com',
+//     department: 'classical literature',
+//     assistCustomer: null,
+// };
+*/
+
+/*
+// Task 04.04
+
+// const offer: any = {
+//     book: {
+//         title: 'Essential TypeScript',
+//     },
+// };
+
+// console.log(offer.magazine);
+// console.log(offer.magazine?.getTitle());
+// console.log(offer.book.getTitle?.());
+// console.log(offer.book.authors?.[10]);
+*/
+
+// Task 04.05
+
+// console.log(getProperty(mybook, 'title'));
+// console.log(getProperty(mybook, 'markDamaged'));
+// console.log(getProperty(mybook, 'isbn'));
