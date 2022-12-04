@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-redeclare */
 showHello('greeting', 'TypeScript');
 
@@ -190,6 +191,45 @@ function getProperty(book: Book, prop: BookProperties): any {
     return typeof value === 'function' ? value.name : value;
 }
 
+// // // //
+
+class ReferenceItem {
+    // title: string;
+    // year: number;
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
+    #id: number;
+
+    private _publisher: string;
+
+    get publisher(): string {
+        return this._publisher.toUpperCase();
+    }
+
+    set publisher(newPublisher: string) {
+        this._publisher = newPublisher;
+    }
+
+    static department: string = 'Research Dep.';
+
+    constructor(id: number, public title: string, private year: number) {
+        console.log('Creating a new ReferenceItem...');
+        this.#id = id;
+    }
+
+    printitem(): void {
+        console.log(` ${this.title} was published in ${this.year}`);
+        console.log(ReferenceItem.department);
+        console.log(Object.getPrototypeOf(this).constructor.department);
+    }
+
+    getId(): number {
+        return this.#id;
+    }
+}
 /*
 // calcTotalPages();
 // Task 02.01
@@ -298,3 +338,11 @@ const mybook: Book = {
 // console.log(getProperty(mybook, 'title'));
 // console.log(getProperty(mybook, 'markDamaged'));
 // console.log(getProperty(mybook, 'isbn'));
+
+// Task 05.01
+const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
+console.log(ref);
+ref.printitem();
+ref.publisher = 'abc group';
+console.log(ref.publisher);
+console.log(ref.getId());
