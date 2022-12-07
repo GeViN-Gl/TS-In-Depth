@@ -193,7 +193,7 @@ function getProperty(book: Book, prop: BookProperties): any {
 
 // // // //
 
-class ReferenceItem {
+abstract class ReferenceItem {
     // title: string;
     // year: number;
     // constructor(newTitle: string, newYear: number) {
@@ -215,19 +215,53 @@ class ReferenceItem {
 
     static department: string = 'Research Dep.';
 
-    constructor(id: number, public title: string, private year: number) {
+    constructor(id: number, public title: string, protected year: number) {
         console.log('Creating a new ReferenceItem...');
         this.#id = id;
     }
 
     printitem(): void {
-        console.log(` ${this.title} was published in ${this.year}`);
+        console.log(`${this.title} was published in ${this.year}`);
         console.log(ReferenceItem.department);
         console.log(Object.getPrototypeOf(this).constructor.department);
     }
 
     getId(): number {
         return this.#id;
+    }
+
+    abstract printCitation(): void;
+}
+
+class Encyclopedia extends ReferenceItem {
+    constructor(id: number, title: string, year: number, public edition: number) {
+        super(id, title, year);
+    }
+
+    /*
+    override printitem(): void {
+        super.printitem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }
+*/
+    printCitation(): void {
+        console.log(`${this.title}-${this.year}`);
+    }
+}
+
+// interface A {
+//     a: number;
+// }
+
+class UniversityLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+
+    // a: number = 1;
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
     }
 }
 /*
@@ -279,20 +313,20 @@ class ReferenceItem {
 */
 
 // Task 04.01
-const mybook: Book = {
-    id: 5,
-    title: 'Colors, Backgrounds, and Gradients',
-    author: 'Eric A. Meyer',
-    available: true,
-    category: Category.CSS,
-    // year: 2015,
-    // copies: 3,
-    pages: 200,
-    // // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
-    markDamaged(reason: string) {
-        console.log(`Damaged: ${reason}`);
-    },
-};
+// const mybook: Book = {
+//     id: 5,
+//     title: 'Colors, Backgrounds, and Gradients',
+//     author: 'Eric A. Meyer',
+//     available: true,
+//     category: Category.CSS,
+//     // year: 2015,
+//     // copies: 3,
+//     pages: 200,
+//     // // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`),
+//     markDamaged(reason: string) {
+//         console.log(`Damaged: ${reason}`);
+//     },
+// };
 
 // printBook(mybook);
 // mybook.markDamaged('missing back cover');
@@ -340,9 +374,22 @@ const mybook: Book = {
 // console.log(getProperty(mybook, 'isbn'));
 
 // Task 05.01
-const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
-console.log(ref);
-ref.printitem();
-ref.publisher = 'abc group';
-console.log(ref.publisher);
-console.log(ref.getId());
+// const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
+// console.log(ref);
+// ref.printitem();
+// ref.publisher = 'abc group';
+// console.log(ref.publisher);
+// console.log(ref.getId());
+
+// Task 05.02 05.03
+// const refBook: Encyclopedia = new Encyclopedia(1, 'Learn TypeScript', 2022, 2);
+// refBook.printitem();
+// consol e.log(refBook);
+// refBook.printCitation();
+
+// Task 05.04
+
+const favoriteLibrarian: Librarian /* & A */ = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// favoriteLibrarian.a = 2;
