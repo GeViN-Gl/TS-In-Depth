@@ -274,7 +274,25 @@ function showHello(divName: string, name: string) {
 // UL.UniversityLibrarian.prototype['a'] = 3;
 
 // console.log(favoriteLibrarian1);
-// favoriteLibrarian1.
+// favoriteLibrarian1.name = 'Anna';
+// favoriteLibrarian1['printLibraian']();
+
+// Task 08.03
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+// favoriteLibrarian.assistFaculty = null;
+// favoriteLibrarian.teachCommunity = null; // Cause error
+
+// Task 08.04
+
+// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+// refBook.printitem();
+
+// Task 08.05
+const favoriteLibrarian = new UL.UniversityLibrarian();
+console.log(favoriteLibrarian);
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
 
 // ------------------------------------ //
 // Task 09.01
@@ -299,7 +317,7 @@ function showHello(divName: string, name: string) {
 // console.log('End');
 
 // Task 09.03
-console.log('Begin');
-logSearchResults(Category.JavaScript);
-logSearchResults(Category.Software);
-console.log('End');
+// console.log('Begin');
+// logSearchResults(Category.JavaScript);
+// logSearchResults(Category.Software);
+// console.log('End');

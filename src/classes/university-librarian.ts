@@ -1,4 +1,4 @@
-import { logger, seald } from '../decorators';
+import { logger, logMethod, logParameter, seald, writable } from '../decorators';
 import * as Interfaces from './../interfaces';
 
 // interface A {
@@ -6,16 +6,27 @@ import * as Interfaces from './../interfaces';
 // }
 
 // @seald('UniversityLibrarian')
-@logger
+// @logger
 class UniversityLibrarian implements Interfaces.Librarian {
     name: string;
     email: string;
     department: string;
 
     // a: number = 1;
-
-    assistCustomer(custName: string, bookTitle: string): void {
+    @logMethod
+    assistCustomer(@logParameter custName: string, @logParameter bookTitle: string): void {
         console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
+    }
+
+    // @writable(true)
+    /* static */
+    assistFaculty(): void {
+        console.log('Assist Faculty');
+    }
+
+    // @writable(false)
+    teachCommunity(): void {
+        console.log('Teach Community');
     }
 }
 
