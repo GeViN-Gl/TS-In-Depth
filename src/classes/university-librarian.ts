@@ -1,4 +1,4 @@
-import { logger, logMethod, logParameter, seald, writable } from '../decorators';
+import { format, logger, logMethod, logParameter, seald, writable } from '../decorators';
 import * as Interfaces from './../interfaces';
 
 // interface A {
@@ -8,6 +8,7 @@ import * as Interfaces from './../interfaces';
 // @seald('UniversityLibrarian')
 // @logger
 class UniversityLibrarian implements Interfaces.Librarian {
+    @format()
     name: string;
     email: string;
     department: string;

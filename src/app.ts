@@ -289,10 +289,22 @@ function showHello(divName: string, name: string) {
 // refBook.printitem();
 
 // Task 08.05
-const favoriteLibrarian = new UL.UniversityLibrarian();
-console.log(favoriteLibrarian);
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+
+// Task 08.06
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// console.log(favoriteLibrarian.name);
+// favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// console.log(favoriteLibrarian);
+
+// Task 08.07
+const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+refBook.copies = 200;
+// refBook.copies = -200; // cause error
 
 // ------------------------------------ //
 // Task 09.01
