@@ -1,4 +1,4 @@
-import { ShelfItem } from '../interfaces';
+import { Book, Magazine, ShelfItem } from '../interfaces';
 
 export default class Shelf<T extends ShelfItem> {
     private items: T[] = [];
@@ -21,13 +21,18 @@ export default class Shelf<T extends ShelfItem> {
 }
 
 // TODO
-// export class Shelf2 {
-//     private items: Book[] | Magazine[] = [];
-//     add(item: T): void {
-//         this.items.push(item);
-//     }
+export class Shelf2 {
+    private items: Book[] | Magazine[] = [];
 
-//     getFirst(): T {
-//         return this.items[0];
-//     }
-// }
+    private isMagazine(item: Book | Magazine): item is Magazine {
+        return (<Magazine>item).publisher !== undefined;
+    }
+
+    add(item: Book & Magazine): void {
+        this.items.push(item);
+    }
+
+    getFirst() {
+        return this.items[0];
+    }
+}

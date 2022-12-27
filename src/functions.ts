@@ -144,6 +144,14 @@ export function getProperty(book: Book, prop: BookProperties): any {
 
     return typeof value === 'function' ? value.name : value;
 }
+export function getObjectPropery<TObject, TKey extends keyof TObject>(
+    obj: TObject,
+    prop: TKey,
+): TObject[TKey] | string {
+    const value = obj[prop];
+
+    return typeof value === 'function' ? value.name : value;
+}
 
 export function setDefaultConfig(options: TOptions) {
     options.duration ??= 100;

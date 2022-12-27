@@ -8,10 +8,13 @@ import {
     logBookTitles,
     getBookAuthorByIndex,
     purge,
+    getObjectPropery,
+    createCustomer,
 } from './functions';
 import { Book, Librarian, Magazine } from './interfaces';
 import RefBook from './classes/encyclopedia';
 import { Library } from './classes/library';
+import { BookRequiredFields, UpdatedBook, CreateCustomerFunctionType } from './types';
 
 showHello('greeting', 'TypeScript');
 
@@ -210,21 +213,21 @@ function showHello(divName: string, name: string) {
 // console.log('🚀 ~ library', library);
 
 // Task 07.01
-const inventory: Book[] = [
-    { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software },
-    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
-    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
-    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software },
-];
-const result1 = purge(inventory);
-console.log('🚀 ~ result', result1);
-const result2 = purge([1, 2, 3]);
-console.log('🚀 ~ result2', result2);
+// const inventory: Book[] = [
+//     { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software },
+//     { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+//     { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+//     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software },
+// ];
+// const result1 = purge(inventory);
+// console.log('🚀 ~ result', result1);
+// const result2 = purge([1, 2, 3]);
+// console.log('🚀 ~ result2', result2);
 
-// Task 07.02
-const bookShelf: Shelf<Book> = new Shelf<Book>();
-inventory.forEach(book => bookShelf.add(book));
-console.log('🚀 ~ bookShelf', bookShelf);
+// Task 07.02, 07.03
+// const bookShelf: Shelf<Book> = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// console.log('🚀 ~ bookShelf', bookShelf);
 
 // const magazines: Magazine[] = [
 //     { title: 'Programming Language Monthly', publisher: 'Code Mags' },
@@ -235,3 +238,26 @@ console.log('🚀 ~ bookShelf', bookShelf);
 // const magazineShelf = new Shelf<Magazine>();
 // magazines.forEach(mag => magazineShelf.add(mag));
 // console.log(magazineShelf.getFirst().title);
+
+// magazineShelf.printTitles();
+// console.log(magazineShelf.find('Five Points'));
+// console.log(getObjectPropery(magazines[0], 'title'));
+// console.log(getObjectPropery<Book, 'author'|'title>(inventory[1], 'author'));
+
+// Task 07.04
+// const bookRequiredFields: BookRequiredFields = {
+//     author: 'Anna',
+//     available: false,
+//     category: Category.Angular,
+//     id: 1,
+//     markDamaged: null,
+//     pages: 200,
+//     title: 'Learn Angular',
+// };
+// const updatedBook: UpdatedBook = {
+//     id: 1,
+//     pages: 300,
+// };
+// let params: Parameters<CreateCustomerFunctionType>;
+// params = ['Anna', 30, 'Kyiv'];
+// createCustomer(...params);
