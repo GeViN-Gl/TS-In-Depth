@@ -10,6 +10,10 @@ import {
     purge,
     getObjectPropery,
     createCustomer,
+    getBooksByCategory,
+    logCategorySearch,
+    getBooksByCategoryPromise,
+    logSearchResults,
 } from './functions';
 import { Book, Librarian, Magazine } from './interfaces';
 import RefBook from './classes/encyclopedia';
@@ -261,3 +265,41 @@ function showHello(divName: string, name: string) {
 // let params: Parameters<CreateCustomerFunctionType>;
 // params = ['Anna', 30, 'Kyiv'];
 // createCustomer(...params);
+
+// Task 08.01 08.02
+// const favoriteLibrarian1 = new UL.UniversityLibrarian();
+// const favoriteLibrarian2 = new UL.UniversityLibrarian();
+// favoriteLibrarian1['a'] = 1;
+// UL.UniversityLibrarian['a'] = 2;
+// UL.UniversityLibrarian.prototype['a'] = 3;
+
+// console.log(favoriteLibrarian1);
+// favoriteLibrarian1.
+
+// ------------------------------------ //
+// Task 09.01
+
+// console.log('Begin');
+// getBooksByCategory(Category.JavaScript, logCategorySearch);
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('End');
+
+// Task 09.02
+// console.log('Begin');
+// getBooksByCategoryPromise(Category.JavaScript)
+//     .then(titles => {
+//         console.log(titles);
+//         return Promise.resolve(titles.length);
+//     })
+//     .then(n => console.log(n))
+//     .catch(reason => console.log(reason));
+// getBooksByCategoryPromise(Category.Software)
+//     .then(titles => console.log(titles))
+//     .catch(reason => console.log(reason));
+// console.log('End');
+
+// Task 09.03
+console.log('Begin');
+logSearchResults(Category.JavaScript);
+logSearchResults(Category.Software);
+console.log('End');
